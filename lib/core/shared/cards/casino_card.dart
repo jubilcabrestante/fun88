@@ -3,17 +3,18 @@ import 'package:fun88_clone/app/theme/app_colors.dart';
 
 class CasinoCardWidget extends StatelessWidget {
   final String title;
+  final double width;
 
-  const CasinoCardWidget({super.key, required this.title});
+  const CasinoCardWidget({super.key, required this.title, required this.width});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 170,
-      width: 150,
+      width: width,
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(12),
         color: AppColors.lightgray,
       ),
       child: Column(
@@ -28,11 +29,11 @@ class CasinoCardWidget extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: AppColors.gray,
               borderRadius: const BorderRadius.vertical(
-                bottom: Radius.circular(25),
+                bottom: Radius.circular(12),
               ),
             ),
             child: Text(

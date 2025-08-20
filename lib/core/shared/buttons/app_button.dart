@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fun88_clone/app/theme/app_colors.dart';
 
 class AppButton extends StatelessWidget {
   final String textButton;
@@ -15,13 +16,20 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 24),
       decoration: BoxDecoration(
         color: color,
-        border: Border.all(style: BorderStyle.solid, width: 1),
-        borderRadius: BorderRadius.all(Radius.circular(25)),
+        border: Border.all(style: BorderStyle.none),
+        borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
-      child: Center(child: Text(textButton, style: theme.textTheme.labelSmall)),
+      child: Center(
+        child: Text(
+          textButton,
+          style: theme.textTheme.labelSmall?.copyWith(
+            color: AppColors.textSecondary,
+          ),
+        ),
+      ),
     );
   }
 }

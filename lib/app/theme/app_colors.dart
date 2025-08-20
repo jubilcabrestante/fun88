@@ -11,7 +11,7 @@ class AppColors {
 
   // Theme colors
   static const Color primary = Color.fromARGB(255, 73, 158, 255);
-  static const Color secondary = Color.fromARGB(255, 79, 255, 69);
+  static const Color secondary = Color.fromARGB(255, 47, 207, 39);
   static const Color error = Color.fromARGB(0, 255, 68, 68);
 
   // Miscellaneous

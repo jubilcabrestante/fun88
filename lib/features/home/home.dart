@@ -48,6 +48,7 @@ class _HomeState extends State<Home> {
                 color: AppColors.primary,
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.bold,
+                fontSize: 21,
               ),
             ),
             Row(
@@ -64,10 +65,14 @@ class _HomeState extends State<Home> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            HeadingCarouselSlider(imageUrls: imageList),
-            SizedBox(height: 180, child: casinoCardListView()),
+            HeadingCarouselSlider(),
+            SizedBox(height: 150, child: casinoCardListView()),
             SizedBox(height: 120, child: iconListView()),
-            SizedBox(height: 400, child: gameListView()),
+            Container(
+              padding: EdgeInsets.only(bottom: 60),
+              height: 460,
+              child: gameListView(),
+            ),
           ],
         ),
       ),
@@ -103,33 +108,16 @@ class _HomeState extends State<Home> {
     );
   }
 
-  GridView gameListView() {
-    return GridView.builder(
-      padding: const EdgeInsets.all(8),
-      itemCount: gameList.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, // 3 items per row
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        childAspectRatio: 1, // square items
-      ),
-      itemBuilder: (context, index) {
-        final game = gameList[index];
-        return GameCardWidget(imageUrl: game.imageUrl);
-      },
-      shrinkWrap: true, // required inside scrollable
-      physics: const NeverScrollableScrollPhysics(), // let parent scroll
-    );
-  }
-
   ListView casinoCardListView() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final itemWidth = (screenWidth - 60) / 3;
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.all(8),
       itemCount: cardList.length,
       itemBuilder: (context, index) {
         final card = cardList[index];
-        return CasinoCardWidget(title: card.title);
+        return CasinoCardWidget(title: card.title, width: itemWidth);
       },
     );
   }
@@ -137,8 +125,7 @@ class _HomeState extends State<Home> {
   ListView iconListView() {
     final theme = Theme.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
-    final itemWidth = (screenWidth - 60) / 4; // minus padding
-
+    final itemWidth = (screenWidth - 60) / 4;
     return ListView.separated(
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.all(8),
@@ -176,6 +163,23 @@ class _HomeState extends State<Home> {
       },
     );
   }
+}
+
+GridView gameListView() {
+  return GridView.builder(
+    padding: const EdgeInsets.all(8),
+    itemCount: 20,
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 3, // 3 items per row
+      mainAxisSpacing: 8,
+      crossAxisSpacing: 8,
+      childAspectRatio: 1, // square items
+    ),
+    itemBuilder: (context, index) {
+      return GameCardWidget();
+    },
+    shrinkWrap: true, // required inside scrollable
+  );
 }
 
 class IconItem {

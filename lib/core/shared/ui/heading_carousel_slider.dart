@@ -4,38 +4,36 @@ import 'package:flutter/material.dart';
 import 'package:fun88_clone/app/theme/app_colors.dart';
 
 class HeadingCarouselSlider extends StatelessWidget {
-  final List<String> imageUrls;
-  const HeadingCarouselSlider({super.key, required this.imageUrls});
+  const HeadingCarouselSlider({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.25,
       decoration: BoxDecoration(color: AppColors.lightgray),
       child: CarouselSlider(
         options: CarouselOptions(
           autoPlay: true,
-          aspectRatio: 2.0,
+          aspectRatio: 1.0,
           enlargeCenterPage: true,
         ),
-        items:
-            imageUrls.map((imageUrl) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Stack(
-                  children: [
-                    Center(
-                      child: Icon(
-                        Icons.broken_image,
-                        size: 200,
-                        color: AppColors.gray,
-                      ),
-                    ),
-                  ],
+        items: List.generate(5, (index) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              width: double.infinity,
+              color: AppColors.lightgray,
+              child: Center(
+                child: Icon(
+                  Icons.broken_image,
+                  size: 150,
+                  color: AppColors.gray,
                 ),
-              );
-            }).toList(),
+              ),
+            ),
+          );
+        }),
       ),
     );
   }
