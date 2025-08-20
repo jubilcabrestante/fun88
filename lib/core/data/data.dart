@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fun88_clone/features/home/home.dart';
+import 'package:fun88_clone/features/home/presentation/home_screen.dart';
 
 final List<IconItem> iconList = [
   IconItem(icon: Icons.home, label: "Home"),

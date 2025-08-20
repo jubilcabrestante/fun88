@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
+import 'package:fun88_clone/app/router/app_router.gr.dart';
 import 'package:fun88_clone/app/theme/app_colors.dart';
 import 'package:fun88_clone/core/data/data.dart';
 import 'package:fun88_clone/core/shared/buttons/app_button.dart';
@@ -12,14 +14,15 @@ import 'package:fun88_clone/core/utils/snack_bar.dart';
 import 'package:gap/gap.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+@RoutePage()
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int _currentIndex = 0;
@@ -30,7 +33,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: Sidebar(
-        list: ['Home', 'Favorite', 'History', 'Casino', 'Profile'],
+        list: ['HomeScreen', 'Favorite', 'History', 'Casino', 'Profile'],
         onTap: () {
           _scaffoldKey.currentState?.openDrawer();
         },
@@ -53,7 +56,11 @@ class _HomeState extends State<Home> {
             ),
             Row(
               children: [
-                AppButton(textButton: "Login", color: AppColors.primary),
+                AppButton(
+                  textButton: "Login",
+                  color: AppColors.primary,
+                  onClick: () => context.router.push(const LoginRoute()),
+                ),
                 Gap(20),
                 AppButton(textButton: "Register", color: AppColors.secondary),
               ],

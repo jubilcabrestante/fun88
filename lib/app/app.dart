@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:fun88_clone/features/home/home.dart';
-import 'package:toastification/toastification.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fun88_clone/app/router/app_router.dart';
+import 'package:fun88_clone/app/theme/app_themes.dart';
+import 'package:fun88_clone/features/login/domain/cubit/login_cubit.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AppRouter _appRouter = AppRouter();
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ToastificationWrapper(
-      config: ToastificationConfig(
-        maxTitleLines: 2,
-        maxDescriptionLines: 6,
-        marginBuilder:
-            (context, alignment) => const EdgeInsets.fromLTRB(0, 16, 0, 110),
-      ),
-      child: MaterialApp(
-        title: 'Toastification',
+    return BlocProvider(
+      create: (context) => LoginCubit(),
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: 'Fun88',
+        theme: AppThemes.lightTheme,
+        routerDelegate: _appRouter.delegate(),
+        routeInformationParser: _appRouter.defaultRouteParser(),
         builder:
             (context, child) => ResponsiveBreakpoints.builder(
               child: child!,
@@ -27,7 +30,6 @@ class MyApp extends StatelessWidget {
                 Breakpoint(start: 600, end: 767, name: BreakPoints.lg.value),
               ],
             ),
-        home: const Home(),
       ),
     );
   }
@@ -39,9 +41,6 @@ enum BreakPoints {
   md("medium"),
   lg("large");
 
-  // The value that will be associated with each enum member
   final String value;
-
-  // Constructor to assign the value
   const BreakPoints(this.value);
 }
